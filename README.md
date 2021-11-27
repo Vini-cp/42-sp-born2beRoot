@@ -120,7 +120,7 @@ getent passwd <username>
 chage -l <username>
 ```
 
-#### Gruops
+#### Groups
 
 ```sh
 addgroup <group_name>
@@ -144,7 +144,84 @@ getent group user42
 
 ### Hostname
 
+```sh
+hostnamectl
+```
 
+```sh
+sudo hostname NEW_HOSTNAME
+```
+
+### Partitions
+
+```sh
+lsblk
+```
+
+### Sudo
+
+Criar o diretório:
+
+```sh
+sudo mkdir /var/log/sudo
+```
+
+Arquivo de configuração:
+
+```sh
+sudo visudo
+```
+
+- Limitar a 3 tentativas: `Defaults passwd_tries = 3`
+
+- Mensagem de erro:   `Defaults badpass_message`
+
+- Salvar todos os acessos via sudo: 
+
+```sh
+Defaults logfile="/var/log/sudo/sudo.log"
+
+Defaults log_input, log_output
+
+Defaults iolog_dir="/var/log/sudo"
+```
+
+- Para solicitar TTY: `Defaults requiretty`
+
+- Definir local do sudo: `Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"`
+
+### UFW
+
+UFW, or uncomplicated firewall, is a frontend for managing firewall rules in Arch Linux, Debian, or Ubuntu.
+
+```sh
+dpkg -l | grep ufw
+```
+
+Verificar o status: `ufw status numbered`
+
+Permitir conexões na porta 8080: `ufw allow 8080`
+
+Deletar conexão: `ufw delete (that number, for example 5 or 6)`
+
+### SSH
+
+```sh
+dpkg -l | grep ssh
+```
+
+```sh
+service ssh status
+```
+
+### Script monitoring.sh
+
+Need these to run on 30-sec boundaries, keep commands in sync.
+
+```sh
+* * * * *              /path/to/executable param1 param2
+* * * * * ( sleep 30 ; /path/to/executable param1 param2 )
+```
 
 ### Links
 
